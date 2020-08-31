@@ -1,0 +1,212 @@
+﻿@{
+    Layout = "~/Views/Layout_new/_LayoutPageCommon.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/AngularCode.js"></script>
+
+
+<style>
+    .faddedmydiv
+        {
+                   opacity: 1.5;
+    z-index: 1050;
+    width: 2000px;
+    position: absolute;
+    margin-top: -88%;
+    background-color: #12131275;
+    height: 5000px;
+        }
+</style>
+
+
+<div  ng-app="myApp" ng-controller="myCtrl" ng-init="Get_All_Associate();Get_All_Specilization();">
+        <div class="be-content">
+            @Html.Hidden("AssociateID_")
+            
+            <div class="main-content container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row table-filters-container">
+
+                            <div class="col-md-12 table-filters">
+                                <div class="filter-container">
+                                    <div>
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <label class="control-label">By Name</label>
+                                                <input type="text" class="form-control" maxlength="20" id="inputphone" placeholder="Associate Name" ng-model="bynamefilter" ng-change="inputChanged()" >
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label">By Specilization:</label>
+                                                <select ng-model="ddlSpecilization"  class="form-control"  ng-change="inputChanged()" ng-options="s.Specialization_name for s in t_Specialization">
+                                                    <option value="">--Select--</option>                                                
+    @*<option data-ng-repeat="specfilter in t_Specialization" value="{{specfilter.Specialization_ID}}">{{specfilter.Specialization_name}}</option>*@ 
+                                                   
+                                                </select>
+                                             </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row wizard-row">
+                    <div class="col-md-12 fuelux">
+                        
+                                <div class="block-wizard panel panel-default">
+                                    <div id="wizard1" class="wizard wizard-ux">
+
+                                        <div class="step-content">
+                                            <div data-step="1" class="step-pane active" style="padding:0px;">
+                                                <div data-parsley-namespace="data-parsley-" data-parsley-validate="" class="form-horizontal group-border-dashed">
+                                                    <div class="form-group no-padding">
+                                                        <div class="col-sm-7">
+                                                            <h3 class="wizard-title">Associate Details Info</h3>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12" style="    border: 1px #d4d0d0 solid;    border-radius: 5px;    padding-top: 5px;    margin-top: 15px;">
+                                                            <div class="form-group no-padding" style="background-color:white;">
+                                                                <div class="col-sm-12">
+                                                                    <h3 class="wizard-title col-md-4" style=" float:left;    color: black;">Associate List</h3>
+                                                                    <a class="col-md-8" style="float: left;" onclick=" $('#displayfade').show(); $('#formdisplay').show();"><div class="col-md-12"><div class="icon-container" style=" padding: 0px; float: right;"><div class="icon" style="background-color: #4CAF50;"><span class="mdi mdi-plus-circle" style="    color: white;"></span></div><span class="icon-class">Add New Associate</span></div>       </div></a>
+
+                                                                </div>
+                                                            </div>
+                                                            <div id="accordion1" class="panel-group ">
+
+                                                                <table class="table table-bordered">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                <b>ID</b>
+                                                                            </th>
+                                                                            <th>
+                                                                                <b>Name</b>
+                                                                            </th>
+                                                                            <th>
+                                                                                <b>Phone</b>
+                                                                            </th>
+                                                                            <th>
+                                                                                <b>Address</b>
+                                                                            </th>
+                                                                            <th>speciluzation</th>
+                                                                            <th>
+                                                                                <b>Actions</b>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+
+                                                                        <tr ng-repeat="Ast in Associatees">
+                                                                            <td class="cell-detail">
+                                                                                {{Ast.Associate_ID}}
+                                                                            </td>
+                                                                            <td class="cell-detail">
+                                                                                {{Ast.Associate_Name}}
+                                                                            </td>
+                                                                            <td class="cell-detail">
+                                                                                {{Ast.Associate_Phone}}
+                                                                            </td>
+                                                                            <td class="cell-detail">
+                                                                                {{Ast.Associate_address}}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{Ast.spez}}
+                                                                            </td>
+                                                                            <td class="cell-detail">
+                                                                                <input type="button" class="btn btn-warning" value='Update' ng-click="UpdateAssociate(Ast)" />
+                                                                                <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteAssociate(Ast)" />
+                                                                                <input type="button" class="btn btn-primary" value="Add Specialization" ng-click="DeleteAssociate(Ast)" />
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+        </div>
+
+        <div id="displayfade" class="faddedmydiv"  style="display:none;"></div>
+        <div id="formdisplay"  class="modal-container colored-header colored-header-success custom-width modal-effect-9 modal-show"  style="display:none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a id="lnkexit"   class="close modal-close" ng-click="cancelactionallassociate()"><span class="mdi mdi-close"></span></a>
+                    <h3 class="modal-title">Associate Detail</h3>
+                </div>
+                <div class="modal-body form">
+
+                       <div class="form-group">
+                                <label >Name:</label>
+                                <div >
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Name" ng-model="AssociateName" required>
+                                </div>
+                            </div>
+                       
+                       <div class="form-group">
+                                <label >Phone No:</label>
+                                <div >
+                                    <input required type="text" class="form-control" maxlength="20" id="inputphone" placeholder="Phone No." ng-model="AssociatePhone"  onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+                                </div>
+                            </div>
+                      
+                            <div class="form-group">
+                                <label>Address:</label>
+                                <div >
+                                    <textarea type="text" rows="4" class="form-control" id="inputLabel3" placeholder="Address" ng-model="AssociateAddress" required></textarea>
+                                </div>
+                            </div>
+                       
+                    <div class="form-group">
+                        <label>Select Specialization</label>
+                        <div class="row">
+                            <div class="col-md-4"  ng-repeat="spec in t_Specialization">
+                              
+                                <label for="chkCustomer_{{spec.Specialization_ID}}">
+                                    <input id="chkCustomer_{{spec.Specialization_ID}}" type="checkbox" ng-model="spec.Selected" />
+                                    {{spec.Specialization_name}}
+                                </label>
+                               
+                        </div>
+                    </div>
+                        
+                </div>
+                <div class="modal-footer">
+                    <input type="button" id="btnclose" class="btn btn-default modal-close" value="Close" ng-click="cancelactionallassociate()" />
+                    <input type="button" id="btnSave" class="btn btn-success modal-close" value="Submit" ng-click="InsertData()" />
+                  
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

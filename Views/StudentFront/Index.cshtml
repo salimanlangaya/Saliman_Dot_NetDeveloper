@@ -1,0 +1,235 @@
+﻿
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/studentangular.js"></script>
+
+
+
+<style>
+    .faddedmydiv {
+        opacity: 1.5;
+        z-index: 1050;
+        width: 2000px;
+        position: absolute;
+        margin-top: -88%;
+        background-color: #12131275;
+        height: 5000px;
+    }
+    .form-control {
+        height: 32px;
+        padding: 0px 5px;
+    }
+</style>
+
+
+<div ng-app="myApp" ng-controller="myCtrl" ng-init="GetAllClass();GetAllSubject();GetallstudentList();">
+    <div class="be-content">
+        @Html.Hidden("StudentID_")
+
+        <div class="main-content container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row table-filters-container">
+
+                        <div class="col-md-12 table-filters">
+                            <div class="filter-container">
+                                <div>
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <label class="control-label">By Class:</label>
+                                            <select ng-model="ddlClass" class="form-control" ng-change="GetallstudentListfilter()" ng-options="s.ClassName for s in GetAllClasslist">
+                                                <option value="">--Select--</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">By Subject:</label>
+                                            <select ng-model="ddlSubject" class="form-control" ng-change="GetallstudentListfilter()" ng-options="s.SubjectName for s in GetAllSubjectlist">
+                                                <option value="">--Select--</option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row wizard-row">
+                <div class="col-md-12 fuelux">
+
+                    <div class="block-wizard panel panel-default">
+                        <div id="wizard1" class="wizard wizard-ux">
+
+                            <div class="step-content">
+                                <div data-step="1" class="step-pane active" style="padding:0px;">
+                                    <div data-parsley-namespace="data-parsley-" data-parsley-validate="" class="form-horizontal group-border-dashed">
+                                        <div class="form-group no-padding">
+                                            <div class="col-sm-7">
+                                                <h3 class="wizard-title">Students List </h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12" style="    border: 1px #d4d0d0 solid;    border-radius: 5px;    padding-top: 5px;    margin-top: 15px;">
+                                                <div class="form-group no-padding" style="background-color:white;">
+                                                    <div class="col-sm-12">
+                                                        <h3 class="wizard-title col-md-4" style=" float:left;    color: black;">Students List</h3>
+                                                        <a class="col-md-8" style="float: left;" onclick=" $('#displayfade').show(); $('#formdisplay').show();"><div class="col-md-12"><div class="icon-container" style=" padding: 0px; float: right;"><div class="icon" style="background-color: #4CAF50;"><span class="mdi mdi-plus-circle" style="    color: white;"></span></div><span class="icon-class">Add New Student</span></div>       </div></a>
+
+                                                    </div>
+                                                </div>
+                                                <div id="accordion1" class="panel-group ">
+
+                                                    <table class="table table-bordered">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    <b>ID</b>
+                                                                </th>
+                                                                <th>
+                                                                    <b>First Name</b>
+                                                                </th>
+                                                                <th>
+                                                                    <b>Last Name</b>
+                                                                </th>
+                                                                <th>
+                                                                    <b>Class</b>
+                                                                </th>
+                                                                <th>Subject</th>
+                                                                <th>Marks</th>
+                                                                <th>
+                                                                    <b>Actions</b>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+
+                                                            <tr ng-repeat="std in GetallstudentList_Split">
+                                                                <td class="cell-detail">
+                                                                    {{std.student.StudentID}}
+                                                                </td>
+                                                                <td class="cell-detail">
+                                                                    {{std.student.FirstName}}
+                                                                </td>
+                                                                <td class="cell-detail">
+                                                                    {{std.student.LastName}}
+                                                                </td>
+                                                                <td class="cell-detail">
+                                                                    {{std.student.ClassName}}
+                                                                </td>
+                                                                <td colspan="2">
+                                                                   
+                                                                    <table class="table table-bordered">
+                                                                        <tr ng-repeat="capa in std.subjectlist">
+                                                                            <td>{{capa.SubjectName}}</td>
+                                                                            <td><p>{{capa.Marks}}</p></td>
+                                                                           </tr>
+                                                                    </table>
+                                                                </td>
+<td class="cell-detail">
+                                                                    <input type="button" class="btn btn-warning" value='Edit' ng-click="FillUpdateDetails(std.student)" />
+                                                                    <input type="button" class="btn btn-danger" value="Delete" ng-click="RemoveStudent(std.student.StudentID)" />
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="displayfade" class="faddedmydiv" style="display:none;"></div>
+    <div id="formdisplay" class="modal-container colored-header colored-header-success custom-width modal-effect-9 modal-show" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header" style=" padding: 10px 20px;">
+                <a id="lnkexit" class="close modal-close" ng-click="cancelactionInUp()"><span class="mdi mdi-close"></span></a>
+                <h3 class="modal-title">Student Detail</h3>
+            </div>
+            <form novalidate name="form" class="css-form_Dist">
+                <div class="modal-body form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>First Name:</label>
+                                <div>
+                                    <input type="text" class="form-control" id="firstname" placeholder="First Name" ng-model="FirstName" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Last Name:</label>
+                                <div>
+                                    <input type="text" class="form-control" id="lastname" placeholder="Last Name" ng-model="LastName" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Class</label>
+                                <div>
+                                    <select ng-model="ddlClassin"
+                                            ng-options="cls.ClassID as cls.ClassName for cls in GetAllClasslist"class="form-control" required>
+                                        <option value="">Select Class</option>
+                                    </select>
+
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+
+                            <div class="form-group">
+                                <label>Select Subjects</label>
+                                <div class="row">
+                                    <div class="col-md-4" ng-repeat="subjc in GetAllSubjectlist">
+
+                                        <label for="chkCustomer_{{subjc.SubjectID}}">
+                                            <input id="chkCustomer_{{subjc.SubjectID}}" type="checkbox" ng-model="subjc.Selected" />
+                                            {{subjc.SubjectName}}
+                                        </label>
+                                        <input ng-required="subjc.Selected > 0" class="form-control" maxlength="2"
+                                               ng-model='subjc.Marks' placeholder="Marks"
+                                               id="marks_{{subjc.SubjectID}}" type="number" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" id="btnclose" class="btn btn-default modal-close" value="Close" ng-click="cancelactionInUp()" />
+                                <input type="button" id="btnSave" class="btn btn-success modal-close" value="Submit" ng-click="InsertData('form')" />
+
+                            </div>
+                        </div>
+</form>
+        </div>
+
+
+    </div>
+</div>

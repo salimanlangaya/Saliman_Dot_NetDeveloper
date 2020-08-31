@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Saliman_Dot_NetDeveloper</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Content/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+
+    <style>
+        .ajax__calendar_container {
+            z-index: 999999;
+        }
+
+        .fuelux .wizard .step-content {
+            margin-bottom: 100px;
+        }
+    </style>
+    <script>
+        var specialKeys = new Array();
+        specialKeys.push(8); //Backspace
+        function IsNumeric(e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+            //    document.getElementById("error").style.display = ret ? "none" : "inline";
+            return ret;
+        }
+
+
+    </script>
+    <style type="text/css">
+        .form-control-label span {
+            color: red;
+        }
+
+        input[readonly] {
+            background-color: #607D8B !important;
+            cursor: no-drop;
+        }
+
+        .j-label span {
+            color: red;
+        }
+
+        .form-control .ng-pristine .ng-untouched .ng-empty .ng-invalid .ng-invalid-required {
+            background-color: #f443365c;
+        }
+
+        .css-form_Dist input:not([type=button]).ng-invalid {
+            background-color: #f443365c;
+        }
+
+            .css-form_Dist input:not([type=button]).ng-invalid.ng-touched {
+                background-color: #f443365c;
+            }
+
+        .css-form_Dist input:not([type=button]).ng-valid.ng-touched {
+            background-color: #4caf503d;
+        }
+
+        .form-control .ng-pristine .ng-untouched .ng-empty .ng-invalid .ng-invalid-required {
+            background-color: #f443365c;
+        }
+
+        .css-form_Dist textarea.ng-invalid.ng-touched {
+            background-color: #f443365c;
+        }
+
+        .css-form_Dist textarea.ng-valid.ng-touched {
+            background-color: #4caf503d;
+        }
+
+        .css-form_Dist select.ng-invalid.ng-touched {
+            background-color: #f443365c;
+        }
+
+        .css-form_Dist select.ng-valid.ng-touched {
+            background-color: #4caf503d;
+        }
+
+        .dx-datagrid .dx-scrollable-scrollbar {
+            background-color: rgba(191, 191, 191, 0.76) !important;
+        }
+
+        #gridContainer .dx-scrollable-scroll {
+            height: 20px !important;
+        }
+
+        #gridContainer .dx-scrollable-scroll-content {
+            background-color: #3498db !important;
+        }
+
+        #gridContainer .dx-scrollable-scroll {
+            height: 15px !important;
+        }
+
+        #gridContainer .dx-scrollbar-hoverable {
+            height: 15px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="be-wrapper be-fixed-sidebar">
+        <nav class="navbar navbar-default navbar-fixed-top be-top-header">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand"></a>
+                </div>
+                <div class="be-right-navbar">
+                    <ul class="nav navbar-nav navbar-right be-user-nav">
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="~/Content/avatar-150.png" alt="Avatar"><span class="user-name">Túpac Amaru</span></a>
+                          
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <div class="be-left-sidebar">
+            <div class="left-sidebar-wrapper">
+                <a href="#" class="left-sidebar-toggle">Student Management System</a>
+                <div class="left-sidebar-spacer">
+                    <div class="left-sidebar-scroll">
+                        <div class="left-sidebar-content">
+                            <ul class="sidebar-elements">
+                                <li class="divider">Menu</li>
+                                <li class="active">
+                                    <a href="/StudentFront/Index"><i class="icon mdi mdi-settings"></i><span>Students List</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-widget">
+
+                    <div class="progress">
+                        <div style="width: 60%;" class="progress-bar progress-bar-primary"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .progressdiv {
+                position: absolute;
+                margin-top: 150px;
+                background-color: rgba(51, 51, 51, 0.14);
+                height: 500px;
+                margin: 0%;
+                width: 100%;
+                z-index: 99999999999999999999999999999999999;
+                text-align: center;
+                padding: 50%;
+            }
+        </style>
+
+     
+
+
+        @RenderBody()
+
+
+    </div>
+
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //initialize the javascript
+            App.init();
+            App.dashboard();
+
+        });
+    </script>
+   
+</body>
+</html>
